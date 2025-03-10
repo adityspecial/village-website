@@ -1,0 +1,100 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-warm-50: #faf6f1;
+  --color-warm-100: #f5ebe0;
+  --color-warm-200: #e3d5c3;
+  --color-warm-300: #d4bfa6;
+  --color-warm-400: #b89b7a;
+  --color-warm-500: #96774c;
+  --color-warm-600: #7d5e3f;
+  --color-warm-700: #654932;
+  --color-warm-800: #4d3425;
+  --color-warm-900: #362118;
+}
+
+body {
+  font-family: 'Source Sans Pro', sans-serif;
+  color: var(--color-warm-900);
+  background-color: var(--color-warm-50);
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Playfair Display', serif;
+}
+
+.tree-container {
+  position: fixed;
+  left: 0;
+  height: 100vh;
+  width: 300px;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.tree {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  transform-origin: bottom center;
+}
+
+.program-card {
+  @apply bg-white rounded-lg p-6 shadow-lg transition-all duration-300 hover:shadow-xl;
+}
+
+.program-card:hover {
+  transform: translateY(-5px);
+}
+
+.stats-container {
+  @apply grid grid-cols-1 md:grid-cols-3 gap-8 py-12;
+}
+
+.stat-item {
+  @apply flex flex-col items-center text-center p-6 bg-warm-100 rounded-lg;
+}
+
+.newsletter-form {
+  @apply max-w-md mx-auto bg-warm-100 p-8 rounded-lg shadow-lg;
+}
+
+.testimonial-card {
+  @apply bg-white p-6 rounded-lg shadow-md mb-6;
+}
+
+.footer {
+  @apply bg-warm-800 text-warm-100 py-12;
+}
+
+/* Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.floating {
+  animation: float 3s ease-in-out infinite;
+}
+
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(to right, var(--color-warm-400), var(--color-warm-600));
+  transform-origin: 0;
+}
+
+/* Navigation styles */
+.nav-link {
+  @apply text-warm-50 hover:text-warm-300 transition-colors;
+}
+
+.nav-link.active {
+  @apply text-warm-300;
+}
