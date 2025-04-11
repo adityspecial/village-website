@@ -14,7 +14,6 @@ const Home = () => {
       <Statistics />
       <Testimonials />
       <Newsletter />
-      <Footer />
     </div>
   );
 };
