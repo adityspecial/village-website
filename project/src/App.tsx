@@ -9,6 +9,7 @@ import Impact from './pages/Impact';
 import Resources from './pages/Resources';
 import GetInvolved from './pages/GetInvolved';
 import Donate from './pages/Donate';
+import TeamPage from './components/Team';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             <Route path="/resources/*" element={<Resources />} />
             <Route path="/get-involved/*" element={<GetInvolved />} />
             <Route path="/donate" element={<Donate />} />
+            <Route path="/about/team" element={<TeamPage />} />
           </Routes>
         </main>
         <Footer />
