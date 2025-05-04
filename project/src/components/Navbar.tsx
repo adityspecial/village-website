@@ -5,6 +5,7 @@ import { Menu, X, Home, Info, Book, Heart, Users, DollarSign } from 'lucide-reac
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
+  const [activeSubSubmenu, setActiveSubSubmenu] = useState<string | null>(null); // ✅ for 2nd level
 
   const navItems = [
     {
@@ -24,8 +25,23 @@ const Navbar = () => {
       path: '/work',
       icon: Book,
       submenu: [
-        { name: 'Education', path: '/work/education' },
-        { name: 'Agriculture', path: '/work/agriculture' },
+        {
+          name: 'Education',
+          path: '/work/education',
+          children: [
+            { name: 'Akshar Prabhavam', path: '/work/education/akshar-prabhavam' },
+            { name: 'Digital Literacy', path: '/work/education/digital-literacy' },
+            { name: 'Spoken English', path: '/work/education/spoken-english' }
+          ]
+        },
+        {
+          name: 'Agriculture',
+          path: '/work/agriculture',
+          children: [
+            { name: 'Farmer Tranning', path: '/work/agriculture/farmer-trannig' },
+            { name: 'Soil Health', path: '/work/agriculture/soil' }
+          ]
+        },
         { name: 'Environment', path: '/work/environment' },
         { name: 'Health', path: '/work/health' },
         { name: 'Livelihood', path: '/work/livelihood' },
@@ -76,6 +92,11 @@ const Navbar = () => {
 
   const toggleSubmenu = (itemName: string) => {
     setActiveSubmenu(activeSubmenu === itemName ? null : itemName);
+    setActiveSubSubmenu(null);
+  };
+
+  const toggleSubSubmenu = (subItemName: string) => {
+    setActiveSubSubmenu(activeSubSubmenu === subItemName ? null : subItemName);
   };
 
   return (
@@ -94,7 +115,10 @@ const Navbar = () => {
                 key={item.name}
                 className="relative group"
                 onMouseEnter={() => item.submenu && setActiveSubmenu(item.name)}
-                onMouseLeave={() => setActiveSubmenu(null)}
+                onMouseLeave={() => {
+                  setActiveSubmenu(null);
+                  setActiveSubSubmenu(null);
+                }}
               >
                 <div className="flex items-center space-x-1">
                   <Link
@@ -104,30 +128,40 @@ const Navbar = () => {
                     <item.icon className="h-4 w-4 mr-1" />
                     <span>{item.name}</span>
                   </Link>
-                  {item.submenu && (
-                    <button 
-                      className="text-amber-900 focus:outline-none"
-                      onClick={() => toggleSubmenu(item.name)}
-                    >
-                      <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                      </svg>
-                    </button>
-                  )}
                 </div>
 
-                {/* Desktop Dropdown */}
+                {/* First-Level Dropdown */}
                 {item.submenu && activeSubmenu === item.name && (
                   <div className="absolute left-0 top-full mt-0 w-56 bg-white rounded-md shadow-lg py-2 z-50 border border-amber-100">
                     {item.submenu.map((subItem) => (
-                      <Link
+                      <div
                         key={subItem.name}
-                        to={subItem.path}
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-amber-50"
-                        onClick={() => setActiveSubmenu(null)}
+                        className="relative group"
+                        onMouseEnter={() => subItem.children && setActiveSubSubmenu(subItem.name)}
+                        onMouseLeave={() => setActiveSubSubmenu(null)}
                       >
-                        {subItem.name}
-                      </Link>
+                        <Link
+                          to={subItem.path}
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-amber-50"
+                        >
+                          {subItem.name}
+                        </Link>
+
+                        {/* Second-Level Dropdown */}
+                        {subItem.children && activeSubSubmenu === subItem.name && (
+                          <div className="absolute left-full top-0 w-56 bg-white shadow-lg border border-amber-100 rounded-md">
+                            {subItem.children.map((child) => (
+                              <Link
+                                key={child.name}
+                                to={child.path}
+                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-amber-50"
+                              >
+                                {child.name}
+                              </Link>
+                            ))}
+                          </div>
+                        )}
+                      </div>
                     ))}
                   </div>
                 )}
@@ -135,7 +169,7 @@ const Navbar = () => {
             ))}
           </div>
 
-          {/* Hamburger Icon (Mobile) */}
+          {/* Hamburger Icon */}
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
@@ -166,24 +200,55 @@ const Navbar = () => {
                       onClick={() => toggleSubmenu(item.name)}
                     >
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={activeSubmenu === item.name ? "M5 15l7-7 7 7" : "M19 9l-7 7-7-7"} />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                          d={activeSubmenu === item.name ? "M5 15l7-7 7 7" : "M19 9l-7 7-7-7"} />
                       </svg>
                     </button>
                   )}
                 </div>
 
-                {/* Mobile Submenu */}
+                {/* First-Level Submenu */}
                 {item.submenu && activeSubmenu === item.name && (
-                  <div className="pl-8 space-y-1 mt-1">
+                  <div className="pl-6 mt-1 space-y-1">
                     {item.submenu.map((subItem) => (
-                      <Link
-                        key={subItem.name}
-                        to={subItem.path}
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-amber-50 rounded-md"
-                        onClick={() => setIsOpen(false)}
-                      >
-                        {subItem.name}
-                      </Link>
+                      <div key={subItem.name}>
+                        <div className="flex justify-between items-center">
+                          <Link
+                            to={subItem.path}
+                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-amber-50 rounded-md"
+                            onClick={() => !subItem.children && setIsOpen(false)}
+                          >
+                            {subItem.name}
+                          </Link>
+                          {subItem.children && (
+                            <button
+                              className="px-2 py-1 text-amber-900 focus:outline-none"
+                              onClick={() => toggleSubSubmenu(subItem.name)}
+                            >
+                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                                  d={activeSubSubmenu === subItem.name ? "M5 15l7-7 7 7" : "M19 9l-7 7-7-7"} />
+                              </svg>
+                            </button>
+                          )}
+                        </div>
+
+                        {/* Second-Level Submenu */}
+                        {subItem.children && activeSubSubmenu === subItem.name && (
+                          <div className="pl-6 mt-1 space-y-1">
+                            {subItem.children.map((child) => (
+                              <Link
+                                key={child.name}
+                                to={child.path}
+                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-amber-50 rounded-md"
+                                onClick={() => setIsOpen(false)}
+                              >
+                                {child.name}
+                              </Link>
+                            ))}
+                          </div>
+                        )}
+                      </div>
                     ))}
                   </div>
                 )}

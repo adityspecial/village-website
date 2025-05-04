@@ -10,7 +10,10 @@ import Resources from './pages/Resources';
 import GetInvolved from './pages/GetInvolved';
 import Donate from './pages/Donate';
 import TeamPage from './components/Team';
-
+import AksharPrabhavam from './components/AksharPrabhavam';
+import SpokenEnglish from './components/SpokenEnglish';
+import DigitalLiteracy from './components/Digital-Literacy';
+import FarmerTraining from './components/Farmer-Traning';
 function App() {
   return (
     <Router>
@@ -26,6 +29,10 @@ function App() {
             <Route path="/get-involved/*" element={<GetInvolved />} />
             <Route path="/donate" element={<Donate />} />
             <Route path="/about/team" element={<TeamPage />} />
+            <Route path="/work/education/akshar-prabhavam" element={< AksharPrabhavam />} />
+            <Route path="/work/education/digital-literacy" element={<DigitalLiteracy />} />
+            <Route path="/work/education/spoken-english" element={<SpokenEnglish />} />
+            <Route path="/work/agriculture/farmer-trannig" element={<FarmerTraining />} />
           </Routes>
         </main>
         <Footer />
