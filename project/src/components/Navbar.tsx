@@ -5,7 +5,7 @@ import { Menu, X, Home, Info, Book, Heart, Users, DollarSign } from 'lucide-reac
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
-  const [activeSubSubmenu, setActiveSubSubmenu] = useState<string | null>(null); // ✅ for 2nd level
+  const [activeSubSubmenu, setActiveSubSubmenu] = useState<string | null>(null);
 
   const navItems = [
     {
@@ -38,13 +38,33 @@ const Navbar = () => {
           name: 'Agriculture',
           path: '/work/agriculture',
           children: [
-            { name: 'Farmer Tranning', path: '/work/agriculture/farmer-trannig' },
+            { name: 'Farmer Training', path: '/work/agriculture/farmer-training' },
+            { name: 'Farmer Field School', path: '/work/agriculture/farmer-field-school' },
             { name: 'Soil Health', path: '/work/agriculture/soil' }
           ]
         },
-        { name: 'Environment', path: '/work/environment' },
-        { name: 'Health', path: '/work/health' },
-        { name: 'Livelihood', path: '/work/livelihood' },
+        {
+          name: 'Environment',
+          path: '/work/environment',
+          children: [
+            { name: 'Ek Gaon - Ek Jangal', path: '/work/environment/ek-gaon-ek-jangal' }
+          ]
+        },
+        {
+          name: 'Health',
+          path: '/work/health',
+          children: [
+            { name: 'Health and Hygiene Campaign', path: '/work/health/hygiene-campaign' },
+            { name: 'Yoga', path: '/work/health/yoga' }
+          ]
+        },
+        {
+          name: 'Livelihood',
+          path: '/work/livelihood',
+          children: [
+            { name: 'Jeevandhara', path: '/work/livelihood/jeevandhara' }
+          ]
+        },
         { name: 'Gram Siri', path: '/work/gram-siri' },
         { name: 'KIF Chapters', path: '/work/chapters' },
         { name: 'Adopted Villages', path: '/work/villages' }
