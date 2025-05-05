@@ -32,6 +32,7 @@ import FarmerTraining from './components/Farmer-Traning';
 import EkGaon from './components/Ek-Gaon';
 import Health from './components/Health-Hyegine';
 import Yoga from './components/Yoga';
+import RuralEmpowerment from './components/Jeevadhara';
 
 
 // Work -> Environment
@@ -86,7 +87,7 @@ function App() {
             <Route path="/work/education/akshar-prabhavam" element={<AksharPrabhavam />} />
             <Route path="/work/education/digital-literacy" element={<DigitalLiteracy />} />
             <Route path="/work/education/spoken-english" element={<SpokenEnglish />} />
-
+            <Route path="/work/livelihood/jeevandhara" element={<RuralEmpowerment />} />
             {/* Work - Agriculture */}
             <Route path="/work/agriculture/farmer-training" element={<FarmerTraining />} />
               {/*<Route path="/work/agriculture/soil-health" element={<SoilHealth />} />*/}
@@ -95,7 +96,7 @@ function App() {
             <Route path="/work/agriculture/ek-gaon-ek-jangal" element={<EkGaon />} />
             <Route path="/work/health/hygiene-campaign" element={<Health />} />
             <Route path="/work/health/yoga" element={<Yoga />} />
-            
+
           </Routes>
         </main>
         <Footer />
